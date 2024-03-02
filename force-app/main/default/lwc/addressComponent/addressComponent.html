@@ -1,0 +1,41 @@
+<template>
+    <div class="container">
+        <template if:true={addresses}>
+            <!-- Display existing addresses -->
+            <div>
+                <h2>Existing Addresses:</h2>
+                <template for:each={addresses} for:item="address">
+                    <div key={address.Id}>
+                        <div>{address.Type__c}</div>
+                        <div>{address.Street__c}</div>
+                        <div>{address.City__c}, {address.State__c}, {address.Country__c}</div>
+                        <div>{address.PostalCode__c}</div>
+                    </div>
+                </template>
+            </div>
+        </template>
+        
+        <!-- Add new address form -->
+        <div>
+            <h2>Add New Address:</h2>
+            <lightning-record-edit-form object-api-name="Address__c" onsuccess={handleSuccess}>
+                <lightning-messages></lightning-messages>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-input-field field-name="Type__c" required></lightning-input-field>
+                        <lightning-input-field field-name="Street__c" required></lightning-input-field>
+                        <lightning-input-field field-name="City__c" required></lightning-input-field>
+                        <lightning-input-field field-name="State__c" required></lightning-input-field>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input-field field-name="Country__c" required></lightning-input-field>
+                        <lightning-input-field field-name="PostalCode__c" required></lightning-input-field>
+                    </div>
+                </div>
+                <div class="slds-m-top_medium">
+                    <lightning-button type="submit" variant="brand" label="Save Address"></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </div>
+</template>

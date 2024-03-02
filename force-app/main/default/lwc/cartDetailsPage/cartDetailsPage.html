@@ -1,0 +1,42 @@
+<template>
+    <div class="cart-container">
+        <!-- Display cart items -->
+        <template for:each={cartItems} for:item="cartItem">
+            <div key={cartItem.Id} class="cart-item">
+                <div>{cartItem.Product__r.Short_Description__c}</div>
+                <div>{cartItem.Quantity__c}</div>
+                <div>{cartItem.Product__r.Price__c}</div>
+                <div>
+                    <!-- Quantity increase decrease buttons -->
+                    <lightning-button-icon icon-name="utility:add" variant="border-filled" size="small" onclick={handleIncrement} data-id={cartItem.Id}></lightning-button-icon>
+                    <lightning-button-icon icon-name="utility:dash" variant="border-filled" size="small" onclick={handleDecrement} data-id={cartItem.Id}></lightning-button-icon>
+                </div>
+                <div>
+                    <!-- Delete button -->
+                    <lightning-button-icon icon-name="utility:delete" variant="border-filled" size="small" onclick={handleDelete} data-id={cartItem.Id}></lightning-button-icon>
+                </div>
+            </div>
+        </template>
+
+        <!-- Total cart amount -->
+        <div class="total-amount">Total amount: {totalAmount}</div>
+
+        <!-- Link to apply coupon -->
+        <div>
+            <a href="javascript:void(0);" onclick={openCouponModal}>Apply Coupon</a>
+        </div>
+
+        <!-- Coupon modal -->
+        <template if:true={showCouponModal}>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <div class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Coupon input field -->
+                    <input type="text" value={couponCode} onchange={handleCouponChange}></input>
+                    <!-- Apply button -->
+                    <lightning-button label="Apply" variant="brand" onclick={applyCoupon}></lightning-button>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

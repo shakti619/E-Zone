@@ -1,0 +1,29 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-shopping-cart" title="Cart"></span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        CART DETAILS
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <template if:true={cartDetails.data}>
+                <p>Cart Name: {cartDetails.data.Name}</p>
+               <p> Status: {cartDetails.data.Status__c}</p>
+                <p>Quantity: {cartDetails.data.Quantity__c}</p>
+                <p>Amount: {cartDetails.data.Amount__c}</p>
+                <p>Customer: {cartDetails.data.Customer__r.Name}</p>
+                
+            </template>
+            <template if:true={cartDetails.error}>
+                <p>Error fetching cart details</p>
+            </template>
+        </div>
+    </div>
+</template>

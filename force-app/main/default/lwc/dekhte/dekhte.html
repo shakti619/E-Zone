@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Product List" icon-name="standard:products">
+        <div class="slds-grid slds-wrap">
+            <template for:each={products} for:item="product">
+                <div class="slds-col slds-size_1-of-3" key={product.Id}>
+                    <lightning-card class="product-card" title="">
+                        <img src={product.Hero_Image_URL__c} alt={product.Name} class="product-image slds-box slds-m-bottom_medium" onclick={navigateToProductDetail} height="800" width="800" data-product-id={product.Id}>
+                        <div class="product-details">
+                            <p class="slds-text-heading_medium slds-m-bottom_medium" onclick={navigateToProductDetail} data-product-id={product.Id}><strong style="text-transform: uppercase"><u>{product.Name}</u></strong></p>
+                            <p class="slds-badge slds-badge_inverse">Price: {product.list_price__c}</p>
+                            <p><strong>Description:</strong> {product.Description}</p>
+                            <p class="stock" id="e" data-stock={product.stock}><strong>STOCK:</strong> {product.stock}</p>
+                            <div class="quantity-controls">
+                                <lightning-button-icon onclick={handleIncreaseQuantity} data-product-id={product.Id} icon-name="utility:add" variant="border-filled" size="small"></lightning-button-icon>
+                                <span>Quantity: {product.selectedQuantity}</span>
+                                <lightning-button-icon onclick={handleDecreaseQuantity} data-product-id={product.Id} icon-name="utility:dash" variant="border-filled" size="small"></lightning-button-icon>
+                            </div>
+                            <lightning-button onclick={handleAddToCart} data-product-id={product.Id} label="Add to Cart" size="small"></lightning-button>
+                        </div>
+                    </lightning-card>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

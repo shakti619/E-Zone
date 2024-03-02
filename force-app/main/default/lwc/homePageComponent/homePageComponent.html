@@ -1,0 +1,56 @@
+<template>
+    <div>
+        <!-- Display Cart Details -->
+        <template if:true={homePageDetails.cartDetails}>
+            <div class="slds-card slds-m-bottom_medium">
+                <div class="slds-card__header slds-grid">
+                    <h2 class="slds-text-heading_medium slds-grow">Open Cart</h2>
+                </div>
+                <div class="slds-card__body slds-p-around_medium">
+                    <div>Name: {homePageDetails.cartDetails.Name}</div>
+                    <div>Status: {homePageDetails.cartDetails.Status__c}</div>
+                    <div>Quantity: {homePageDetails.cartDetails.Quantity__c}</div>
+                    <div>Amount: {homePageDetails.cartDetails.Amount__c}</div>
+                    <div>Customer: {homePageDetails.cartDetails.Customer__r.Name}</div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Display Open Orders -->
+        <template if:true={homePageDetails.openOrders}>
+            <div class="slds-card slds-m-bottom_medium">
+                <div class="slds-card__header slds-grid">
+                    <h2 class="slds-text-heading_medium slds-grow">Open Orders</h2>
+                </div>
+                <div class="slds-card__body slds-p-around_medium">
+                    <div>Name: {homePageDetails.openOrders.Name}</div>
+                    <div>Total Items: {homePageDetails.openOrders.Total_Items__c}</div>
+                    <div>Total: {homePageDetails.openOrders.Total__c}</div>
+                    <div>Payment Status: {homePageDetails.openOrders.PaymentStatus__c}</div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Display Recent Orders -->
+        <template if:true={homePageDetails.recentOrders}>
+            <div class="slds-card">
+                <div class="slds-card__header slds-grid">
+                    <h2 class="slds-text-heading_medium slds-grow">Recent Orders</h2>
+                </div>
+                <div class="slds-card__body slds-p-around_medium">
+                    <template for:each={homePageDetails.recentOrders} for:item="order">
+                        <div key={order.Id} class="slds-m-around_medium slds-p-around_medium slds-card slds-col">
+                            <div class="slds-text-heading_small slds-text-title_caps">Order #{order.Name}</div>
+                            <div>Total Items: {order.Total_Items__c}</div>
+                            <div>Total: {order.Total__c}</div>
+                            <div>Payment Status: {order.PaymentStatus__c}</div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+        
+        <!-- Link to Product List Page -->
+        <a href="/product-list" class="slds-button slds-button_brand slds-m-top_medium">Go to Product List</a>
+    </div>
+</template>

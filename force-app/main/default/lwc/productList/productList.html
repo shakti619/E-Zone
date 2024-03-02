@@ -1,0 +1,30 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <template for:each={products} for:item="product">
+            <div key={product.productId} class="slds-col slds-size_1-of-3 slds-p-around_medium">
+                <div class="slds-box slds-box_small">
+                    <div class="product-image">
+                        <img src={product.heroImageUrl} alt={product.Name} />
+                    </div>
+                    <div class="slds-p-top_medium">
+                        <div class="slds-text-heading_medium">{product.productName}</div>
+                        <div class="slds-text-title">{product.productPrice}</div>
+                        <div class="slds-text-body_small">{product.shortDescription}</div>
+                        <div>
+                            <!-- stockStatus.html -->
+
+
+                        </div>
+                        
+                        <div class="slds-p-top_small">
+                            <lightning-button-icon icon-name="utility:add" variant="border-filled" size="small" onclick={handleIncrement}></lightning-button-icon>
+                            <span class="quantity">{product.quantity}</span>
+                            <lightning-button-icon icon-name="utility:dash" variant="border-filled" size="small" onclick={handleDecrement}></lightning-button-icon>
+                            <lightning-button label="Add To Cart" variant="brand" onclick={handleAddToCart}></lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

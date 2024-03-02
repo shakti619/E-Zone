@@ -1,0 +1,38 @@
+<template>
+    <div class="product-detail">
+        <!-- Image Carousel -->
+        <lightning-carousel>
+            <template for:each={product.Product_Images__r} for:item="image">
+                <lightning-carousel-image
+                    key={image.Id}
+                    src={image.URL__c}
+                    header={product.Name}
+                    description={image.Description__c}
+                ></lightning-carousel-image>
+            </template>
+        </lightning-carousel>
+
+        <!-- Product Details -->
+        <div class="product-details">
+            <h2>{product.Name}</h2>
+            <p>${product.list_price__c}</p>
+            <p>{product.Description}</p>
+            <p>{product.TotalQuantity__c > 0 ? 'In Stock' : 'Out of Stock'}</p>
+
+            <!-- Quantity Control -->
+            <div class="quantity-control">
+                <lightning-button-icon icon-name="utility:add" onclick={handleIncrease}></lightning-button-icon>
+                <span>{quantity}</span>
+                <lightning-button-icon icon-name="utility:minus" onclick={handleDecrease}></lightning-button-icon>
+            </div>
+
+            <!-- Add To Cart Button -->
+            <lightning-button label="Add to Cart" onclick={handleAddToCart}></lightning-button>
+        </div>
+
+        <!-- Related Products -->
+        <div class="related-products">
+            <!-- Display related products here -->
+        </div>
+    </div>
+</template>

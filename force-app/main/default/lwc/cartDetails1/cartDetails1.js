@@ -205,17 +205,4 @@ export default class CartDetails1 extends LightningElement {
                 
             };
 
-            }          
-
-     
-
-    
-        
-        
-        
-
-        
-    
-
-    
-
+            }

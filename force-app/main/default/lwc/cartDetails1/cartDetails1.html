@@ -1,0 +1,178 @@
+<template>
+    <div class="container">
+        <template if:true={showCart}>
+            <lightning-card title="Cart Details" icon-name="standard:opportunity">
+                <div class="slds-m-around_medium table-container">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered table">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Product Name">Product Name</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Price">Price</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Quantity">Quantity</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Total Price">Total Price</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Action">Action</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={Items} for:item="item">
+                                <tr key={item.Id} class="slds-hint-parent">
+                                    <td data-label="Product Name">
+                                        <div class="slds-truncate" title={item.Name}><b>{item.Name}</b></div>
+                                    </td>
+                                    <td data-label="Price">
+                                        <div class="slds-truncate" title={item.UnitPrice}>{item.UnitPrice}</div>
+                                    </td>
+                                    <td data-label="Quantity">
+                                        <div class="slds-truncate" title={item.Quantity}>{item.Quantity}</div>
+                                    </td>
+                                    <td data-label="Total Price">
+                                        <div class="slds-truncate" title={item.Total}>{item.Total}</div>
+                                    </td>
+                                    <td data-label="Action">
+                                        <div class="slds-truncate" title={item.Action}>{item.Action}</div>
+                                        <div>
+                                            <button data-product-id={item.Id} onclick={handleIncrease}>Add Item</button>
+                                            <button data-product-id={item.Id} onclick={handleDecrease}>Remove Item</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Total Amount -->
+                <footer class="slds-card__footer slds-m-around_medium total-amount">
+                    <div>
+                        <b>Total: {total}</b>
+
+                        <template if:true={discountPercentage}>
+                            <div class="slds-float_right slds-m-left_small slds-badge slds-theme_success">
+                                <b>Coupon Applied: {couponCode}</b>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div>
+                        <input class="coupon-input" type="text" placeholder="Enter coupon code" oninput={handleCouponCodeChange} />
+                        <button class="coupon-input" onclick={handleApplyCoupon}>Apply Coupon</button>
+                    </div>
+                </footer>
+                <button class="slds-button slds-button_brand slds-float_left slds-m-top_small button-container" onclick={orderHandler}>Place Order</button>
+
+            </lightning-card>
+        </template>
+
+        <template if:true={showModal}>
+            <div class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="slds-text-heading_medium">Order Confirmation</h2>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <p>DO YOU WANT TO PROCEED TO PAYMENT?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="slds-button slds-button_neutral" onclick={handleCancel}>Cancel</button>
+                        <button class="slds-button slds-button_brand" onclick={handleConfirm}>Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+    
+
+    <template if:true={showPayments}>
+        <div class="slds-card">
+            <div class="slds-card__header slds-grid">
+                <h2 class="slds-text-heading_small slds-truncate slds-col slds-no-flex">Payment Options</h2>
+                
+            </div>
+            <div class="slds-card__body">
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                        <div class="slds-radio_button-group">
+                            <span class="slds-button slds-radio_button">
+                                <input type="radio" id="creditCard" name="paymentOption" value="creditCard" checked>
+                                <label class="slds-radio_button__label" for="creditCard">
+                                    <span class="slds-radio_faux"></span>
+                                    <span class="slds-form-element__label">Credit Card</span>
+                                </label>
+                            </span>
+                            <br> <!-- Add a line break for spacing -->
+                            <span class="slds-button slds-radio_button">
+                                <input type="radio" id="stripe" name="paymentOption" value="stripe">
+                                <label class="slds-radio_button__label" for="stripe">
+                                    <span class="slds-radio_faux"></span>
+                                    <span class="slds-form-element__label">Stripe</span>
+                                </label>
+                            </span>
+                            <br> <!-- Add a line break for spacing -->
+                            <span class="slds-button slds-radio_button">
+                                <input type="radio" id="paypal" name="paymentOption" value="paypal">
+                                <label class="slds-radio_button__label" for="paypal">
+                                    <span class="slds-radio_faux"></span>
+                                    <span class="slds-form-element__label">PayPal</span>
+                                </label>
+                            </span>
+                            <br> <!-- Add a line break for spacing -->
+                            <span class="slds-button slds-radio_button">
+                                <input type="radio" id="paytm" name="paymentOption" value="paytm">
+                                <label class="slds-radio_button__label" for="paytm">
+                                    <span class="slds-radio_faux"></span>
+                                    <span class="slds-form-element__label">Paytm</span>
+                                </label>
+                            </span>
+                            <br> <!-- Add a line break for spacing -->
+                            <span class="slds-button slds-radio_button">
+                                <input type="radio" id="cashOnDelivery" name="paymentOption" value="cashOnDelivery">
+                                <label class="slds-radio_button__label" for="cashOnDelivery">
+                                    <span class="slds-radio_faux"></span>
+                                    <span class="slds-form-element__label">Cash On Delivery</span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <h3 class="slds-text-heading_small">Add Card Details</h3>
+                    <label class="slds-form-element__label" for="cardNumber">Card Number:</label>
+                    <div class="slds-form-element__control">
+                        <input type="text" id="cardNumber" name="cardNumber" class="slds-input">
+                    </div>
+                    <label class="slds-form-element__label" for="expiryDate">Expiry Date:</label>
+                    <div class="slds-form-element__control">
+                        <input type="text" id="expiryDate" name="expiryDate" class="slds-input">
+                    </div>
+                    <label class="slds-form-element__label" for="cvv">CVV:</label>
+                    <div class="slds-form-element__control">
+                        <input type="text" id="cvv" name="cvv" class="slds-input">
+                    </div>
+                </div>
+            </div>
+            <div class="slds-card__footer">
+                <button class="slds-button slds-button_brand">Proceed to Payment</button>
+            </div>
+        </div>
+    </template>
+
+    
+
+
+    
+
+    
+
+
+
+</template>

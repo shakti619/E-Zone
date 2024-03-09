@@ -1,0 +1,63 @@
+
+    .slds-card {
+        border: 1px solid #d8dde6;
+        border-radius: 0.25rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .slds-card__header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .slds-card__body {
+        margin-bottom: 1rem;
+    }
+
+    
+    
+
+    .slds-list__item {
+        flex-basis: 50%;
+        padding: 0.5rem;
+    }
+
+    .slds-card__header h2 {
+        margin: 0;
+    }
+
+    .slds-text-heading_small {
+        margin: 0.5rem 0;
+    }
+
+    .slds-m-top_medium {
+        margin-top: 1rem;
+    }
+
+    .slds-m-bottom_small {
+        margin-bottom: 0.5rem;
+    }
+
+    .slds-p-around_medium {
+        padding: 1rem;
+    }
+
+    .slds-p-top_small {
+        padding-top: 0.5rem;
+    }
+
+    .slds-p-bottom_small {
+        padding-bottom: 0.5rem;
+    }   
+
+    .slds-p-horizontal_small {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }   
+
+    
+

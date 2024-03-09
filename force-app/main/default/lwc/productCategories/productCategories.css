@@ -1,0 +1,35 @@
+
+    .slds {
+        padding: 20px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .slds-text-heading_large {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .slds-list_horizontal {
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .slds-list_horizontal__item {
+        margin-bottom: 10px;
+    }
+
+    .slds-text-link {
+        color: #0070d2;
+        text-decoration: none;
+    }
+
+    .slds-list_vertical {
+        list-style-type: none;
+        margin-top: 10px;
+        margin-left: 20px;
+    }

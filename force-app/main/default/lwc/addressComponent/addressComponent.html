@@ -1,41 +1,58 @@
 <template>
-    <div class="container">
-        <template if:true={addresses}>
-            <!-- Display existing addresses -->
-            <div>
-                <h2>Existing Addresses:</h2>
-                <template for:each={addresses} for:item="address">
-                    <div key={address.Id}>
-                        <div>{address.Type__c}</div>
-                        <div>{address.Street__c}</div>
-                        <div>{address.City__c}, {address.State__c}, {address.Country__c}</div>
-                        <div>{address.PostalCode__c}</div>
-                    </div>
-                </template>
-            </div>
-        </template>
+    <div class="slds-card">
         
-        <!-- Add new address form -->
-        <div>
-            <h2>Add New Address:</h2>
-            <lightning-record-edit-form object-api-name="Address__c" onsuccess={handleSuccess}>
-                <lightning-messages></lightning-messages>
-                <div class="slds-grid slds-gutters">
-                    <div class="slds-col">
-                        <lightning-input-field field-name="Type__c" required></lightning-input-field>
-                        <lightning-input-field field-name="Street__c" required></lightning-input-field>
-                        <lightning-input-field field-name="City__c" required></lightning-input-field>
-                        <lightning-input-field field-name="State__c" required></lightning-input-field>
+        <div class="slds-card__body">
+            <!-- Display existing addresses -->
+            <template if:true={addresses}>
+                <div class="slds-card">
+                    <div class="slds-card__header slds-grid">
+                        <h2 class="slds-text-heading_medium slds-grow">Existing Addresses</h2>
                     </div>
-                    <div class="slds-col">
-                        <lightning-input-field field-name="Country__c" required></lightning-input-field>
-                        <lightning-input-field field-name="PostalCode__c" required></lightning-input-field>
+                    <div class="slds-card__body">
+                        <ol class="slds-list_vertical">
+                            <template for:each={addresses} for:item="address">
+                                <li key={address.Id} class="slds-list__item">
+                                    <div class="slds-card slds-box slds-theme_default slds-box_outline slds-border_top slds-border_bottom slds-border_left slds-border_right">
+                                        <div class="slds-card__header">
+                                            <h3 class="slds-text-heading_small">Street:{address.Street__c}</h3>
+                                            <h3 class="slds-text-heading_small">City:{address.City__c}</h3>
+                                            <h3 class="slds-text-heading_small">State:{address.State__c}</h3>
+                                            <h3 class="slds-text-heading_small">Country:{address.Country__c}</h3>
+                                            <h3 class="slds-text-heading_small">Postal Code:{address.PostalCode__c}</h3>
+
+                                        </div>
+                                       
+                                    </div>
+                                </li>
+                            </template>
+                        </ol>
                     </div>
                 </div>
-                <div class="slds-m-top_medium">
-                    <lightning-button type="submit" variant="brand" label="Save Address"></lightning-button>
-                </div>
-            </lightning-record-edit-form>
+                <lightning-button class="slds-m-top_medium" label="UPDATE/ADD" onclick={handleAddAddress} ></lightning-button>
+            </template>
+            <template if:false={addresses}>
+                <p>NO Existing Address Found</p>
+            </template>
+            <!-- Form for adding/editing addresses -->
+            <template if:true={showForm}>
+                
+                    
+                        <lightning-card title="Update Address Information" class="slds-m-top_medium">
+                            <div class="slds-p-around_medium">
+                                <lightning-input class="slds-m-bottom_small" label="Address Name" data-field="Name" type="text" value={Name} onchange={handleInputChange}></lightning-input>
+                                <lightning-input class="slds-m-bottom_small" label="Street" data-field="Street__c" type="text" value={street} onchange={handleInputChange}></lightning-input>
+                                <lightning-input class="slds-m-bottom_small" label="City" data-field="City__c" type="text" value={city} onchange={handleInputChange}></lightning-input>
+                                <lightning-input class="slds-m-bottom_small" label="State" data-field="State__c" type="text" value={state} onchange={handleInputChange}></lightning-input>
+                                <lightning-combobox class="slds-m-bottom_small" label="Country" data-field="Country__c" value={country} options={countryOptions} onchange={handleInputChange}></lightning-combobox>
+                                <lightning-input class="slds-m-bottom_small" label="Postal Code" data-field="PostalCode__c" type="number" value={postalCode} onchange={handleInputChange}></lightning-input>
+                                <lightning-input class="slds-m-bottom_small" label="Landmark" data-field="LandMark__c" type="text" value={landmark} onchange={handleInputChange}></lightning-input>
+                                <lightning-input-field class="slds-m-bottom_small" field-name="Customer_User__c" value={customerId} onchange={handleInputChange}></lightning-input-field>
+                                <lightning-button class="slds-m-top_medium" variant="brand" label="Submit" onclick={handleSubmit}></lightning-button>
+                            </div>
+                        </lightning-card>
+                   
+            </template>
         </div>
     </div>
 </template>
+

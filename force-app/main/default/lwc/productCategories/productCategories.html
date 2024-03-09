@@ -1,24 +1,37 @@
+
+
 <template>
-    <div class="slds-card">
-        <div class="slds-card__header slds-grid">
-            <h2 class="slds-text-heading_medium slds-grow">Product Categories</h2>
-        </div>
-        <div class="slds-card__body slds-p-around_medium">
-            <template for:each={categories} for:item="category">
-                <div key={category.categoryId} class="slds-m-around_medium slds-p-around_medium slds-card slds-col">
-                    <div class="slds-text-heading_small slds-text-title_caps">{category.categoryName}</div>
-                    <!-- Display subcategories if available -->
-                    <template if:true={category.subcategories}>
-                        <ul class="slds-m-top_small">
-                            <template for:each={category.subcategories} for:item="subcategory">
-                                <li key={subcategory.categoryId} onclick={handleCategoryClick} class="slds-m-bottom_x-small slds-text-link">
-                                    {subcategory.categoryName}
-                                </li>
+    <div class="slds-grid slds-wrap container">
+        <div class="slds-col slds-size_1-of-2 categories">
+            <div class="slds-card slds-p-around_medium">
+                <h1 class="slds-text-heading_large">Categories</h1>
+                <ul class="slds-list_horizontal slds-has-dividers_right slds-text-title">
+                    <template for:each={Categories} for:item="category">
+                        <li key={category.Id} class="slds-list__item" onclick={handleCategoryClick} data-category-id={category.id}>{category.Name}</li>
+                        <ul key={category.id} class="slds-list_horizontal slds-has-dividers_right slds-text-title">
+                            <template for:each={category.ProductCat} for:item="productCategory">
+                                <li key={productCategory.Id} class="slds-list__item">{productCategory.Name}</li>
+                                <ul key={productCategory.Id} class="slds-list_horizontal slds-has-dividers_right slds-text-title">
+                                    <template for:each={productCat.Product__c} for:item="product">
+                                        <li key={product.id} class="slds-list__item">{product.Name}</li>
+                                    </template>
+                                </ul>
                             </template>
                         </ul>
                     </template>
-                </div>
-            </template>
+                </ul>
+            </div>
+        </div>
+        <div class="slds-col slds-size_1-of-2 products">
+            <div class="slds-card slds-p-around_medium">
+                <h2 class="slds-text-heading_medium">Products Categories</h2>
+                <ul class="slds-list_horizontal slds-has-dividers_right slds-text-title">
+                    <template for:each={filteredProducts} for:item="product">
+                        <li key={product.id} class="slds-list__item">{product.name}</li>
+                    </template>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
+

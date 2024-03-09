@@ -5,8 +5,14 @@ import addToCart from '@salesforce/apex/dekhte2.addToCart';
 
 export default class Dekhte2 extends LightningElement {
     @track products = [];
+
+    @track detailTemplate = false;
+    @track detailProduct = null;
+    @track relatedImages = [];
     
+
     
+
     @wire(getProducts)
     wiredProducts({ error, data }) {
         if (data) {
@@ -16,7 +22,7 @@ export default class Dekhte2 extends LightningElement {
                     ...product,
                     Hero_Image_URL__c: heroImage ? heroImage.URL__c : 'https://www.shutterstock.com/shutterstock/photos/1336706924/display_1500/stock-vector-block-icon-unavailable-icon-1336706924.jpg',
                     selectedQuantity: 0,
-                    stock: product.TotalQuantity__c > 0 ? "IN-STOCK" : "OUT-OF-STOCK"
+                    stock: product.RemainingQuantity__c > 0 ? "IN-STOCK" : "OUT-OF-STOCK"
                 };
             });
         } else if (error) {
@@ -24,29 +30,38 @@ export default class Dekhte2 extends LightningElement {
         }
     }
 
-    // Method to handle adding a product to the cart
+    navigateToProductDetail(event) {
+        const detailProductId = event.currentTarget.dataset.productId;
+        this.detailProduct = this.products.find(product => product.Id === detailProductId);
+        this.relatedImages=this.detailProduct.Product_Images__r;
+        console.log(this.relatedImages)
+        console.log(this.detailProduct.Name)
+        console.log(this.detailProduct.Id)
+        this.detailTemplate = true;
+    }
+    handleBack() {
+        this.detailTemplate = false;
+    }
+
     handleAddToCart(event) {
         const productId = event.target.dataset.productId;
         console.log(productId)
         const productToAdd = this.products.find(product => product.Id === productId);
         console.log(productToAdd.selectedQuantity)
-        // Check if product is out of stock
-         if (productToAdd.stock === "OUT-OF-STOCK") {
-            this.showToast('error', 'Product Out of Stock', 'This product is currently out of stock');
-            
-        } 
-
-
-
+        if (productToAdd.stock === "OUT-OF-STOCK") {
+            return this.showToast('error', 'Product Out of Stock', 'This product is currently out of stock');
+        }
+        if (productToAdd.selectedQuantity === 0) {
+            this.showToast('error', 'Quantity Missing', 'Please select a quantity before adding to cart');
+            return;
+        }
         console.log(productId)
         addToCart({ productId: productId, quantity: productToAdd.selectedQuantity })
             .then(() => {
-               
                 this.showToast('success', 'Product Added to Cart', 'Product added successfully');
                 productToAdd.selectedQuantity = 0;
             })
             .catch(error => {
-                // Show error toast
                 this.showToast('error', 'Error Adding to Cart', 'An error occurred while adding the product to the cart');
                 console.error('Error adding product to cart:', error);
             });

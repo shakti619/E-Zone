@@ -1,0 +1,29 @@
+/* payments.css */
+        .slds-card {
+            border: 1px solid #d8dde6;
+            border-radius: 0.25rem;
+            padding: 1rem;
+            margin: 1rem;
+            background-color: #f3f4f6;
+        }
+
+        .slds-card__header {
+            padding-bottom: 0.5rem;
+        }
+
+        .slds-card__body {
+            padding: 1rem 0;
+        }
+
+        .slds-form-element {
+            margin-bottom: 1rem;
+        }
+
+        .slds-form-element__label {
+            font-weight: bold;
+        }
+
+        .slds-card__footer {
+            padding-top: 1rem;
+        }
+    

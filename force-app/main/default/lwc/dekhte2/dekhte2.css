@@ -1,0 +1,67 @@
+.bordered-card {
+    border: 1px solid black;
+}
+
+.product-detail {
+    font-size: 1.2em;
+}
+
+.slds-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background-color: #0070d2;
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.slds-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background-color: #0070d2;
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 10px;}
+
+
+
+
+
+
+
+/* 
+.bordered-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.product-details {
+    margin-top: 20px;
+}
+
+.slds-text-heading_medium {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+
+}
+
+.stock {
+    margin-top: 10px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.quantity-controls lightning-button-icon {
+    margin-right: 5px;
+}
+ */
+

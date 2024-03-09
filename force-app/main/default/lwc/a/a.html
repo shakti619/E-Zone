@@ -1,0 +1,81 @@
+<!-- <template if:true={detailTemplate}>
+   <lightning-card title="Product Detail" icon-name="standard:products" class="bordered-card">
+        <lightning-button slot="actions" label="Back" onclick={handleBack}></lightning-button>
+        <lightning-carousel>
+            <template for:each={relatedImages} for:item="image">
+                <lightning-carousel-image key={relatedImages.Id} src={image.URL__c} alternative-text={image.Name} width="200" height="300"></lightning-carousel-image>
+            </template>
+        </lightning-carousel>
+        <div class="product-details">
+            <p class="slds-text-heading_medium slds-m-bottom_medium" data-product-id={detailProduct.Id}><strong style="text-transform:uppercase"><u>{detailProduct.Name}</u></strong></p>
+            <p class="slds-badge slds-badge_inverse">Price: {detailProduct.list_price__c}</p>
+            <p><strong>Description:</strong> {detailProduct.Description}</p>
+            <p class="stock"><strong>STOCK:</strong>{detailProduct.stock}</p>
+            <div class="quantity-controls">
+                <lightning-button-icon onclick={handleIncreaseQuantity} data-product-id={detailProduct.Id} icon-name="utility:add" variant="border-filled" size="small"></lightning-button-icon>
+                <span>Quantity: {detailProduct.selectedQuantity}</span>
+                <lightning-button-icon onclick={handleDecreaseQuantity} data-product-id={detailProduct.Id} icon-name="utility:dash" variant="border-filled" size="small"></lightning-button-icon>
+            </div>
+            <lightning-button onclick={handleAddToCart} data-product-id={detailProduct.Id} label="Add to Cart" size="small"></lightning-button>
+        </div>
+    </lightning-card>
+</template>
+
+
+
+
+
+
+
+
+
+<template if:true={detailTemplate}>
+    <lightning-card title="Product Detail" icon-name="standard:products" class="bordered-card">
+        <lightning-button slot="actions" label="Back" onclick={handleBack}></lightning-button>
+        <lightning-carousel>
+            <template for:each={relatedImages} for:item="image" >
+                <lightning-carousel-image key={relatedImages.Id} src={image.URL__c}  alternative-text={image.Name} width="200" height="300"></lightning-carousel-image>
+            </template>
+        </lightning-carousel>
+        <div class="product-details">
+            <p class="slds-text-heading_medium slds-m-bottom_medium" data-product-id={detailProduct.Id}><strong style="text-transform:uppercase"><u>{detailProduct.Name}</u></strong></p>
+            <p class="slds-badge slds-badge_inverse">Price: {detailProduct.list_price__c}</p>
+            <p><strong>Description:</strong> {detailProduct.Description}</p>
+            <p class="stock"><strong>STOCK:</strong>{detailProduct.stock}</p>
+            <div class="quantity-controls">
+                <lightning-button-icon onclick={handleIncreaseQuantity} data-product-id={detailProduct.Id} icon-name="utility:add" variant="border-filled" size="small"></lightning-button-icon>
+                <span>Quantity: {detailProduct.selectedQuantity}</span>
+                <lightning-button-icon onclick={handleDecreaseQuantity} data-product-id={detailProduct.Id} icon-name="utility:dash" variant="border-filled" size="small"></lightning-button-icon>
+            </div>
+            <lightning-button onclick={handleAddToCart} data-product-id={detailProduct.Id} label="Add to Cart" size="small"></lightning-button>
+        </div>
+    </lightning-card>
+</template>
+</template> -->
+<!-- categoryProductList.html -->
+<template>
+    <lightning-card title="Categories with Product Categories">
+        <template if:true={categories}>
+            <template for:each={categories} for:item="category">
+                <div key={category.Id}>
+                    <p key={category.Id} onclick={handleCategoryClick} data-category-id={category.Id} >{category.Name}</p>
+
+                    <template if:true={productCategories}>
+                        <template for:each={productCategories} for:item="prodCategory">
+                            <div key={prodCategory.Id}>
+                                <p key={prodCategory.Id} onclick={handleProductCategoryClick} data-product-category-id={prodCategory.Name}>{prodCategory.Name} </p>
+                               <template if:true={products}>
+                                    <ul>
+                                        <template for:each={Products} for:item="product">
+                                            <li key={product.Id}>{product.Name}</li>
+                                        </template>
+                                    </ul>
+                                </template> 
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

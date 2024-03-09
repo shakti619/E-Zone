@@ -1,0 +1,42 @@
+<template>
+    <div class="slds-container">
+        <h1 class="slds-text-heading_large">Welcome to the Home Page</h1>
+        
+        <div class="slds-card">
+            <div class="slds-card__header">
+                <h2 class="slds-text-heading_medium">Open Orders</h2>
+            </div>
+            <div class="slds-card__body">
+                <ul class="slds-list_dotted">
+                    <template for:each={openOrder} for:item="order">
+                        <li key={order.id}><b>ORDER ID:</b> {order.Name}</li>   
+                        <li key={order.id}><b>PAYMENT STATUS:</b> {order.Payment_Status__c}</li>
+                        <li key={order.id}><b>ORDER AMOUNT:</b> {order.Total__c}</li>
+                        <li key={order.id}><b>BILLING ADDRESS:</b> {order.Billing_Address__c}</li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="slds-card">
+            <div class="slds-card__header">
+                <h2 class="slds-text-heading_medium">Open Carts</h2>
+            </div>
+            <div class="slds-card__body">
+                <ul class="slds-list_dotted slds-has-dividers_around-space">
+                    <template for:each={openCart} for:item="cart">
+                        <li key={cart.id}><b>CART ID:</b> {cart.Name}</li>
+                        <li key={cart.id}><b>STATUS:</b> {cart.Status__c}</li>
+                        <li key={cart.id}><b>AMOUNT:</b> {cart.Amount__c}</li>
+                        <li key={cart.id}><b>QUANTITY:</b> {cart.Quantity__c}</li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="slds-m-top_medium">
+            <button class="slds-button slds-button_brand" onclick={handleNavigation}>Go to Product List</button>
+        </div>
+    </div>
+</template>
+
